@@ -17,7 +17,7 @@
             <input type="number" class="form-control" id="nbrObjet" required>
             <div class="valid-feedback"></div>
         </div>
-        <form id="form" action="./resultat.html" method="post" class="row g-3 needs-validation" novalidate>
+        <form id="form" action="" method="post" class="row g-3 needs-validation" novalidate>
 
         </form>
     </div>
@@ -48,7 +48,8 @@
 
                     formContent += `
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Voir resultat</button>
+                            <button class="btn btn-primary" type="submit">Inserer</button>
+                            <a class="btn btn-secondary" href="./resultat.html">Voir resultat</button>
                         </div>`
                     form.innerHTML = formContent;
                 }
