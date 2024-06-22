@@ -1,0 +1,27 @@
+package Models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Algorithme {
+    public static List<Bac> firstFit (List<Objet1D> objetsList) {
+        List<Bac> bacs = new ArrayList<>();
+        for (Objet1D objet : objetsList) {
+            boolean placed = false;
+            int nbBac = 1;
+            for (Bac bac : bacs) {
+                if (bac.addObjetFF(objet)) {
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                nbBac++;
+                Bac newBac = new Bac(nbBac);
+                newBac.addObjetFF(objet);
+                bacs.add(newBac);
+            }
+        }
+        return bacs;
+    }
+}
