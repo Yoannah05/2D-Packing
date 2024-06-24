@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Algorithme {
-
     public static boolean isAllObjectPlaced(List<Objet1D> objets){
         for (Objet1D o : objets) {
             if (o.getId_bac() == -1) {
