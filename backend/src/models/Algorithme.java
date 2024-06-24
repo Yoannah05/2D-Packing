@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,21 @@ public class Algorithme {
                 newBac.addObjetFF(objet);
                 bacs.add(newBac);
             }
+        }
+        return bacs;
+    }
+
+    public static List<Bac> pack1D(List<Objet1D> objetsList, String algorithme) {
+        List<Bac> bacs = new ArrayList<>();
+        switch (algorithme) {
+            case "ff":
+                return Algorithme.firstFit(objetsList);
+            case "bf":
+                break;
+            case "wf":
+                break;
+            case "brf":
+                break;
         }
         return bacs;
     }

@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 public class Rect extends Bac{
     public Rect(int id_bac) {
