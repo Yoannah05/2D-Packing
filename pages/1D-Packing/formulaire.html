@@ -18,7 +18,7 @@
             <div class="valid-feedback"></div>
         </div>
         
-        <form id="form" action="" method="post" class="row g-3 needs-validation" novalidate></form>
+        <form id="form" action="/OnedServlet" method="post" class="row g-3 needs-validation" novalidate></form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
@@ -58,7 +58,6 @@
                     formContent += `
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">Inserer</button>
-                            <a class="btn btn-secondary" href="./index.html">Voir resultat</button>
                         </div>`
                     form.innerHTML = formContent;
             }

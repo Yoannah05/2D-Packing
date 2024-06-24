@@ -10,6 +10,21 @@
 </head>
 <body>
     <h1 class="h1 text-center m-4">Resultat 1D Packing</h1>
+    <form method="get" action="/OnedServlet" class="row g-3 p-3 needs-validation w-25" novalidate>
+          <div class="">
+            <label for="validationCustom04" class="form-label">Choix d'algorithme</label>
+            <select name="algo" class="form-select" id="validationCustom04" required>
+              <option value="">First Fit</option>
+              <option value="">Best Fit</option>
+              <option value="">Worst Fit</option>
+            </select>
+            <div class="invalid-feedback"></div>
+          </div>
+  
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Voir resultat</button>
+          </div>
+    </form>
     <div class="container">
         <div class="bac">
             <div class="objet"></div>
