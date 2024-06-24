@@ -70,19 +70,24 @@ public class Algorithme {
         bacs.add(bac); // Ajouter le dernier bac
         return bacs;
     }
-    
+
     public static List<Bac> pack1D(List<Objet1D> objetsList, String algorithme) {
         List<Bac> bacs = new ArrayList<>();
         switch (algorithme) {
             case "ff":
                 return Algorithme.firstFit(objetsList);
             case "bf":
-                break;
+                return Algorithme.bestFit(objetsList);
             case "wf":
-                break;
+                return Algorithme.worstFit(objetsList);
             case "brf":
                 break;
         }
         return bacs;
+    }
+
+    private static List<Bac> worstFit(List<Objet1D> objetsList) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'worstFit'");
     }
 }

@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author yoannah
  */
+@WebServlet("/OnedServlet")
 public class OnedServlet extends HttpServlet {
     static List<Objet1D> objet1ds;
     @Override
