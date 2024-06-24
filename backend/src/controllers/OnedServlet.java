@@ -24,24 +24,17 @@ public class OnedServlet extends HttpServlet {
         request.setAttribute("listeBacs", bacs);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/resultat.jsp");
         dispatcher.forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //  creation des objets
-        int nbrObject = (int) request.getParameter("nbrObject");
+        int nbrObject = (int) request.getParameter("nbrObjet");
         for (int i = 0; i < nbrObject; i++) {
             Objet1D.add(objet1ds, i+1, request.getParameter("nbr")+i+1);
         }
-
-        //  L'algorithme
-        List<Bac> bacs = Algorithme.pack1D(objet1ds, request.getParameter("algo"));
-
-        //  redirection à la page du résultat
-        request.setAttribute("listeBacs", bacs);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/resultat.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/choixAlgo.jsp");
         dispatcher.forward(request, response);
     }
 
