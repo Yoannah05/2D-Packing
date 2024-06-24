@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Algorithme {
+
+    public static boolean isAllObjectPlaced(List<Objet1D> objets){
+        for (Objet1D o : objets) {
+            if (o.getId_bac() == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static List<Bac> firstFit (List<Objet1D> objetsList) {
         List<Bac> bacs = new ArrayList<>();
         for (Objet1D objet : objetsList) {
@@ -25,5 +35,40 @@ public class Algorithme {
         return bacs;
     }
 
-    
+    public static List<Bac> bestFit(List<Objet1D> objetsList) {
+        List<Bac> bacs = new ArrayList<>();
+        int idBac = 0;
+        Bac bac = new Bac(idBac);
+
+        while (!objetsList.isEmpty()) {
+            Objet1D objetOptimal = null;
+            int minSpaceRemaining = Integer.MAX_VALUE;
+
+            for (Objet1D o : objetsList) {
+                //on verifie si l'objet n'appartient pas à un bac
+                //puis on verifie si l'espace libre du bac peut contenir l'objet
+                if (o.getId_bac() == -1 && o.getWidth() <= bac.getSpaceLeft()) {
+                    int tempEspaceRestant = bac.getSpaceLeft() - o.getWidth();
+                    if (tempEspaceRestant < minSpaceRemaining) {
+                        objetOptimal = o;
+                        minSpaceRemaining = tempEspaceRestant;
+                    }
+                }
+            }
+
+            if (objetOptimal!= null) {
+                objetOptimal.setId_bac(idBac);
+                bac.diminueSpaceLeft(objetOptimal.getWidth());
+                bac.getObjets().add(objetOptimal);
+                objetsList.remove(objetOptimal); // Retirez l'objet du liste des objets à placer
+            } else {
+                idBac++; // Incrémenter le numéro de bac si aucun objet ne peut être placé
+                bacs.add(bac);
+                bac = new Bac(idBac);
+            }
+        }
+
+        bacs.add(bac); // Ajouter le dernier bac
+        return bacs;
+    }
 }

@@ -7,13 +7,11 @@ public class Bac {
     private int id_bac;
     private static int width = 500;
     private int spaceLeft;
-
     private List<Objet1D> objets;
 
     //  constructor
     public Bac(int id_bac) {
         this.id_bac = id_bac;
-        // Bac.setWidth(width);
         this.initSpaceLeft();
         this.objets = new ArrayList<>();
     }
@@ -32,22 +30,26 @@ public class Bac {
     //  add object with best fit algorithm
     //  add object with worst fit algorithm
 
-    //  setters and getters
+    // ------ GETTERS -----------
     public int getSpaceLeft() {
         return spaceLeft;
-    }
-
-    public void setSpaceLeft(int spaceLeft) {
-        this.spaceLeft = spaceLeft;
     }
     public int getId_bac() {
         return id_bac;
     }
-    public void setId_bac(int id_bac) {
-        this.id_bac = id_bac;
-    }
     public static int getWidth() {
         return width;
+    }
+    public List<Objet1D> getObjets() {
+        return objets;
+    }
+    
+    // ------ SETTERS -----------
+    public void setSpaceLeft(int spaceLeft) {
+        this.spaceLeft = spaceLeft;
+    }
+    public void setId_bac(int id_bac) {
+        this.id_bac = id_bac;
     }
     public static void setWidth(int width) {
         Bac.width = width;
@@ -55,10 +57,10 @@ public class Bac {
     public void initSpaceLeft() {
         this.spaceLeft = width;
     }
-    public List<Objet1D> getObjets() {
-        return objets;
-    }
     public void setObjets(List<Objet1D> objets) {
         this.objets = objets;
+    }
+    public void diminueSpaceLeft(int nbr){
+        this.spaceLeft -= nbr;
     }
 }

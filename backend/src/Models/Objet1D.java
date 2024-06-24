@@ -4,10 +4,14 @@ public class Objet1D {
     private int id_obj;
     private int width;
     private int id_bac;
+
+
     public Objet1D(int id_obj, int width) {
         this.id_obj = id_obj;
         this.width = width;
+        this.id_bac = -1;
     }
+    
     public int getWidth() {
         return width;
     }
