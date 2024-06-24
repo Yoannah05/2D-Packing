@@ -12,14 +12,6 @@
 
 <body>
     <div class="container">
-        <div class="col-5 mb-2">
-            <label for="type" class="form-label">Type</label>
-            <select class="form-select" id="type" required>
-              <option value="1">Bac</option>
-              <option value="2">Objet</option>
-            </select>
-            <div class="invalid-feedback"></div>
-        </div>
         <div class="col-5 mb-4">
             <label for="nbrObjet" class="form-label">Combien d'objet voulez-vous inserer ?</label>
             <input type="number" class="form-control" id="nbrObjet" required>
@@ -46,12 +38,17 @@
             }
 
             function generateForm(){
-                let formContent = `<h1 class="h1 text-center">1D Packing</h1>`;
+                let formContent = `<h1 class="h1 text-center">1D Packing</h1>
+                    <div class="col-12">
+                        <label for="bac" class="form-label">Width du Bac</label>
+                        <input type="number" class="form-control" id="bac"  required>
+                        <div class="valid-feedback"></div>
+                    </div>`;
                     if (nbr.value !== "") {
                         for (let i = 0; i < nbr.value; i++) {
                             formContent += `
                             <div class="col-12">
-                                <label for="nbr${i + 1}" class="form-label">${type.options[type.selectedIndex].text} ${i + 1}</label>
+                                <label for="nbr${i + 1}" class="form-label">Objet n°${i + 1}</label>
                                 <input type="number" class="form-control" id="nbr${i + 1}"  required>
                                 <div class="valid-feedback"></div>
                             </div>`;
@@ -61,7 +58,7 @@
                     formContent += `
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">Inserer</button>
-                            <a class="btn btn-secondary" href="./resultat.html">Voir resultat</button>
+                            <a class="btn btn-secondary" href="./index.html">Voir resultat</button>
                         </div>`
                     form.innerHTML = formContent;
             }
