@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import Models.Algorithme;
-import Models.Bac;
-import Models.Objet1D;
+import models.Algorithme;
+import models.Bac;
+import models.Objet1D;
 
 public class App {
     public static void main(String[] args) throws Exception {

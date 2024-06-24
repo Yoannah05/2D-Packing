@@ -1,8 +1,11 @@
-package Models;
+package models;
 
 public class Objet2D extends Objet1D{
     private int height;
     private int rotation;
+    public Objet2D(int id_obj, int width) {
+        super(id_obj, width);
+    }
     public int getHeight() {
         return height;
     }
