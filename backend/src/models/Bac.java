@@ -1,12 +1,12 @@
-package Models;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bac {
     private int id_bac;
-    private static int width = 500;
-    private int spaceLeft;
+    protected static int width = 500;
+    protected int spaceLeft;
     private List<Objet1D> objets;
 
     //  constructor

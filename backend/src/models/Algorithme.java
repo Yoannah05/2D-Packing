@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +67,49 @@ public class Algorithme {
                 bac = new Bac(idBac);
             }
         }
-
         bacs.add(bac); // Ajouter le dernier bac
         return bacs;
+    }
+
+    public static List<Bac> pack1D(List<Objet1D> objetsList, String algorithme) {
+        List<Bac> bacs = new ArrayList<>();
+        switch (algorithme) {
+            case "ff":
+                return Algorithme.firstFit(objetsList);
+            case "bf":
+                return Algorithme.bestFit(objetsList);
+            case "wf":
+                return Algorithme.worstFit(objetsList);
+            case "brf":
+                break;
+        }
+        return bacs;
+    }
+
+    private static List<Bac> worstFit(List<Objet1D> objetsList) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'worstFit'");
+    }
+
+    //  2D PACKING ALGORITHM
+    public static List<Rect> FFDH(List<Objet2D> objetsList) {
+        // Sort the objects in decreasing order of height
+        Objet2D.sort(objetsList);
+        List<Rect> rects = new ArrayList<>();
+        for (Objet2D objet : objetsList) {
+            boolean placed = false;
+            for (Rect Rect : rects) {
+                if (Rect.addObjetFF(objet)) {
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                Rect newRect = new Rect(rects.size() + 1);
+                newRect.addObjetFF(objet);
+                rects.add(newRect);
+            }
+        }
+        return rects;
     }
 }
