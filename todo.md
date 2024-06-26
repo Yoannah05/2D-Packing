@@ -5,8 +5,10 @@
         -   Tahina : front + BF 
         -   Landy  : algo brute force + WF 
         -   Yoannah: données + FF
-    ##  Jeudi 27 Juin
-        -   2D-Packing sans rotation
+    ##  Vendredi 28 Juin (2D-Packing sans rotation)
+        -   Tahina : BF
+        -   Yoannah : FFDH
+        -   Landy : NFDH
 
     ##  ...
         -   2D-Packing avec rotation + 3 formes

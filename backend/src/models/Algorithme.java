@@ -90,4 +90,26 @@ public class Algorithme {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'worstFit'");
     }
+
+    //  2D PACKING ALGORITHM
+    public static List<Rect> FFDH(List<Objet2D> objetsList) {
+        // Sort the objects in decreasing order of height
+        Objet2D.sort(objetsList);
+        List<Rect> rects = new ArrayList<>();
+        for (Objet2D objet : objetsList) {
+            boolean placed = false;
+            for (Rect Rect : rects) {
+                if (Rect.addObjetFF(objet)) {
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                Rect newRect = new Rect(rects.size() + 1);
+                newRect.addObjetFF(objet);
+                rects.add(newRect);
+            }
+        }
+        return rects;
+    }
 }
