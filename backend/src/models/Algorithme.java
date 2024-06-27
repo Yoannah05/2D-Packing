@@ -112,4 +112,13 @@ public class Algorithme {
         }
         return rects;
     }
+
+    public static List<Rect> pack2D(List<Objet2D> objetsList, String algorithme) {
+        List<Rect> rects = new ArrayList<>();
+        switch (algorithme) {
+            case "ffdh":
+                return Algorithme.FFDH(objetsList);
+        }
+        return rects;
+    }
 }
