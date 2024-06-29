@@ -14,22 +14,22 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet("/TwodServlet")
 public class TwodServlet extends HttpServlet {
-    static List<Objet1D> objet1ds;
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //  changements d'algorithme
-    }
+    // static List<Objet1D> objet1ds;
+    // @Override
+    // protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    //         throws ServletException, IOException {
+    //     //  changements d'algorithme
+    // }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //  creation des objets
-    }
+    // @Override
+    // protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    //         throws ServletException, IOException {
+    //     //  creation des objets
+    // }
 
-    @Override
-    public String getServletInfo() {
-        return "Controller For 2D Packing";
-    }// </editor-fold>
+    // @Override
+    // public String getServletInfo() {
+    //     return "Controller For 2D Packing";
+    // }// </editor-fold>
 
 }

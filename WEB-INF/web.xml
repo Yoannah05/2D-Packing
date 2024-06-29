@@ -4,6 +4,10 @@
         <servlet-name>OnedServlet</servlet-name>
         <servlet-class>controllers.OnedServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>OnedServlet</servlet-name>
+        <url-pattern>/OnedServlet</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>TwodServlet</servlet-name>
         <servlet-class>controllers.TwodServlet</servlet-class>
