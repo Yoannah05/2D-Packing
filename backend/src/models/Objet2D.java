@@ -13,6 +13,21 @@ public class Objet2D extends Objet1D{
         this.setHeight(height);
     }
 
+    // Trie les objets en ordre décroissant de hauteur (ou de rayon pour le cercle)
+    private static void sortObjects(List<Objet2D> objetsList) {
+        Collections.sort(objetsList, new Comparator<Objet2D>() {
+            @Override
+            public int compare(Objet2D o1, Objet2D o2) {
+                // Comparaison basée sur la hauteur ou le rayon
+                if (o1 instanceof Cercle && o2 instanceof Cercle) {
+                    return Double.compare(((Cercle) o2).getRayon(), ((Cercle) o1).getRayon());
+                } else {
+                    return Integer.compare(o2.getHeight(), o1.getHeight());
+                }
+            }
+        });
+    }
+
     // Sort the objects in decreasing order of height
     public static void sort(List<Objet2D> objet2ds) {
         Collections.sort(objet2ds, new Comparator<Objet2D>() {
