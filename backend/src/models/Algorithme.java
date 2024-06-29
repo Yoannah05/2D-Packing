@@ -71,25 +71,102 @@ public class Algorithme {
         return bacs;
     }
 
-    public static List<Bac> pack1D(List<Objet1D> objetsList, String algorithme) {
-        List<Bac> bacs = new ArrayList<>();
-        switch (algorithme) {
-            case "ff":
-                return Algorithme.firstFit(objetsList);
-            case "bf":
-                return Algorithme.bestFit(objetsList);
-            case "wf":
-                return Algorithme.worstFit(objetsList);
-            case "brf":
-                break;
+    public static List<Bac> worstFit(List<Objet1D> objetsList) {
+            List<Bac> bacs = new ArrayList<>();
+            int idBac = 0;
+    
+            for (Objet1D item : objetsList) {
+                Bac worstBac = null;
+                int maxSpace = -1;
+    
+                for (Bac bac : bacs) {
+                    int remainingSpace = bac.getSpaceLeft();
+                    if (item.getWidth() <= remainingSpace && remainingSpace > maxSpace) {
+                        maxSpace = remainingSpace;
+                        worstBac = bac;
+                    }
+                }
+    
+                if (worstBac != null) {
+                    worstBac.addObjetFF(item);
+                } else {
+                    Bac newBac = new Bac(++idBac);
+                    newBac.addObjetFF(item);
+                    bacs.add(newBac);
+                }
+            }
+    
+            return bacs;
         }
-        return bacs;
-    }
-
-    private static List<Bac> worstFit(List<Objet1D> objetsList) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'worstFit'");
-    }
+    
+        public static List<Bac> bruteForce(List<Objet1D> objetsList) {
+            int n = objetsList.size();
+            int minBins = n;
+            List<Bac> bestSolution = null;
+    
+            List<int[]> partitions = generatePartitions(n);
+            for (int[] partition : partitions) {
+                List<Bac> bacs = createBins(partition, objetsList);
+                if (bacs.size() < minBins) {
+                    minBins = bacs.size();
+                    bestSolution = bacs;
+                }
+            }
+    
+            return bestSolution;
+        }
+    
+        private static List<int[]> generatePartitions(int n) {
+            List<int[]> partitions = new ArrayList<>();
+            int[] partition = new int[n];
+            generatePartitionsRecursive(partitions, partition, 0, 0);
+            return partitions;
+        }
+    
+        private static void generatePartitionsRecursive(List<int[]> partitions, int[] partition, int index, int maxPart) {
+            if (index == partition.length) {
+                partitions.add(partition.clone());
+                return;
+            }
+            for (int i = 0; i <= maxPart; i++) {
+                partition[index] = i;
+                generatePartitionsRecursive(partitions, partition, index + 1, Math.max(maxPart, i + 1));
+            }
+        }
+    
+        private static List<Bac> createBins(int[] partition, List<Objet1D> items) {
+            List<Bac> bacs = new ArrayList<>();
+            for (int i = 0; i < partition.length; i++) {
+                while (partition[i] >= bacs.size()) {
+                    bacs.add(new Bac(bacs.size() + 1));
+                }
+                Bac currentBac = bacs.get(partition[i]);
+                Objet1D item = items.get(i);
+                if (item.getWidth() <= currentBac.getSpaceLeft()) {
+                    currentBac.addObjetFF(item);
+                } else {
+                    // Manage case where item does not fit (this should not happen in a valid partition)
+                    throw new IllegalStateException("Partition leads to invalid bin packing.");
+                }
+            }
+            return bacs;
+        }
+    
+        public static List<Bac> pack1D(List<Objet1D> objetsList, String algorithme) {
+            List<Bac> bacs = new ArrayList<>();
+            switch (algorithme) {
+                case "ff":
+                    return Algorithme.firstFit(objetsList);
+                case "bf":
+                    return Algorithme.bestFit(objetsList);
+                case "wf":
+                    return Algorithme.worstFit(objetsList);
+                case "brf":
+                    return Algorithme.bruteForce(objetsList);
+                default:
+                    throw new IllegalArgumentException("Algorithme non supporté : " + algorithme);
+            }
+        }
 
     //  2D PACKING ALGORITHM
     public static List<Rect> FFDH(List<Objet2D> objetsList) {
@@ -110,6 +187,32 @@ public class Algorithme {
                 rects.add(newRect);
             }
         }
+        return rects;
+    }
+
+    public static List<Rect> NFDH(List<Objet2D> objetsList) {
+
+        objetsList.sort((o1, o2) -> Integer.compare(o2.getHeight(), o1.getHeight()));
+    
+        List<Rect> rects = new ArrayList<>();
+    
+        for (Objet2D objet : objetsList) {
+            boolean placed = false;
+    
+
+            for (Rect rect : rects) {
+                if (rect.addObjetFF(objet)) {
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                Rect newRect = new Rect(rects.size() + 1);
+                newRect.addObjetFF(objet);
+                rects.add(newRect);
+            }
+        }
+    
         return rects;
     }
 
