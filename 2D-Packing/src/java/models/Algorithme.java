@@ -13,7 +13,6 @@ public class Algorithme {
         }
         return true;
     }
-
     public static List<Bac> firstFit (List<Objet1D> objetsList) {
         List<Bac> bacs = new ArrayList<>();
         for (Objet1D objet : objetsList) {
@@ -34,7 +33,6 @@ public class Algorithme {
         }
         return bacs;
     }
-
     public static List<Bac> bestFit(List<Objet1D> objetsList) {
         List<Bac> bacs = new ArrayList<>();
         int idBac = 0;
@@ -70,7 +68,6 @@ public class Algorithme {
         bacs.add(bac); // Ajouter le dernier bac
         return bacs;
     }
-
     public static List<Bac> worstFit(List<Objet1D> objetsList) {
             List<Bac> bacs = new ArrayList<>();
             int idBac = 0;
@@ -86,7 +83,6 @@ public class Algorithme {
                         worstBac = bac;
                     }
                 }
-    
                 if (worstBac != null) {
                     worstBac.addObjetFF(item);
                 } else {
@@ -98,7 +94,6 @@ public class Algorithme {
     
             return bacs;
         }
-    
         public static List<Bac> bruteForce(List<Objet1D> objetsList) {
             int n = objetsList.size();
             int minBins = n;
@@ -115,14 +110,12 @@ public class Algorithme {
     
             return bestSolution;
         }
-    
         private static List<int[]> generatePartitions(int n) {
             List<int[]> partitions = new ArrayList<>();
             int[] partition = new int[n];
             generatePartitionsRecursive(partitions, partition, 0, 0);
             return partitions;
         }
-    
         private static void generatePartitionsRecursive(List<int[]> partitions, int[] partition, int index, int maxPart) {
             if (index == partition.length) {
                 partitions.add(partition.clone());
@@ -133,7 +126,6 @@ public class Algorithme {
                 generatePartitionsRecursive(partitions, partition, index + 1, Math.max(maxPart, i + 1));
             }
         }
-    
         private static List<Bac> createBins(int[] partition, List<Objet1D> items) {
             List<Bac> bacs = new ArrayList<>();
             for (int i = 0; i < partition.length; i++) {
@@ -153,7 +145,6 @@ public class Algorithme {
         }
     
         public static List<Bac> pack1D(List<Objet1D> objetsList, String algorithme) {
-            List<Bac> bacs = new ArrayList<>();
             switch (algorithme) {
                 case "ff":
                     return Algorithme.firstFit(objetsList);
@@ -169,59 +160,46 @@ public class Algorithme {
         }
 
     //  2D PACKING ALGORITHM
-    public static List<Rect> FFDH(List<Objet2D> objetsList) {
+    public static Rect FFDH(List<Objet2D> objetsList) {
         // Sort the objects in decreasing order of height
         Objet2D.sort(objetsList);
-        List<Rect> rects = new ArrayList<>();
+        Rect rect = new Rect(1);
         for (Objet2D objet : objetsList) {
-            boolean placed = false;
-            for (Rect Rect : rects) {
-                if (Rect.addObjetFF(objet)) {
-                    placed = true;
-                    break;
-                }
-            }
-            if (!placed) {
-                Rect newRect = new Rect(rects.size() + 1);
-                newRect.addObjetFF(objet);
-                rects.add(newRect);
+            if (!rect.addObjetFF(objet)) {
+                break;
             }
         }
-        return rects;
+        return rect;
     }
-
-    public static List<Rect> NFDH(List<Objet2D> objetsList) {
-
-        objetsList.sort((o1, o2) -> Integer.compare(o2.getHeight(), o1.getHeight()));
-    
-        List<Rect> rects = new ArrayList<>();
-    
+    public static Rect BFDH(List<Objet2D> objetsList) {
+        // Sort the objects in decreasing order of width
+        Objet2D.sort(objetsList);
+        Rect rect = new Rect(1);
         for (Objet2D objet : objetsList) {
-            boolean placed = false;
-    
-
-            for (Rect rect : rects) {
-                if (rect.addObjetFF(objet)) {
-                    placed = true;
-                    break;
-                }
-            }
-            if (!placed) {
-                Rect newRect = new Rect(rects.size() + 1);
-                newRect.addObjetFF(objet);
-                rects.add(newRect);
+            if (!rect.addObjetBFDH(objet)) { // Assuming addObjetBFDH is implemented to handle BFDH logic
+                break;
             }
         }
-    
-        return rects;
+        return rect;
+    }
+    public static Rect NFDH(List<Objet2D> objetsList) {
+        // Sort the objects in decreasing order of height
+        Objet2D.sort(objetsList);
+        Rect rect = new Rect(1);
+        for (Objet2D objet : objetsList) {
+            if (!rect.addObjetFF(objet)) {
+                break;
+            }
+        }
+        return rect;
     }
 
-    public static List<Rect> pack2D(List<Objet2D> objetsList, String algorithme) {
-        List<Rect> rects = new ArrayList<>();
+    public static Rect pack2D(List<Objet2D> objetsList, String algorithme) {
         switch (algorithme) {
             case "ffdh":
                 return Algorithme.FFDH(objetsList);
+            default:
+                throw new IllegalArgumentException("Algorithme non supporté : " + algorithme);
         }
-        return rects;
     }
 }

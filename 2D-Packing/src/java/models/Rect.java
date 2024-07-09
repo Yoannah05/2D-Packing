@@ -16,6 +16,25 @@ public class Rect extends Bac {
         this.initSpaceLeft();
         this.lignes = new HashMap<>();
     }
+    public boolean addObjetBFDH(Objet2D objet) {
+        if (widthLeft.get(0) < objet.getWidth() || heightLeft.get(0) < objet.getHeight()) {
+            return false; // Not enough space
+        }
+        // Find the smallest rectangle that can accommodate the object
+        // This is a simplified approach; in practice, you'd want to minimize wasted space
+        for (int i = 0; i < widthLeft.size(); i++) {
+            if (widthLeft.get(i) >= objet.getWidth() && heightLeft.get(i) >= objet.getHeight()) {
+                // Found a suitable spot
+                widthLeft.set(i, widthLeft.get(i) - objet.getWidth());
+                heightLeft.set(i, heightLeft.get(i) - objet.getHeight());
+                this.lignes.computeIfAbsent(i, k -> new ArrayList<>()).add(objet);
+                objet.setId_ligne(i);
+                return true;
+            }
+        }
+    
+        return false; // No suitable spot found
+    }
 
     public boolean addObjetFF(Objet2D objet) {
         if (lignes.isEmpty()) {
