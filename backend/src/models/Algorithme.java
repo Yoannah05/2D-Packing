@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Algorithme {
+    static int widthBac = 0;
+
+    public static void setWidthBac(int widthBac) {
+        Algorithme.widthBac = widthBac;
+    }
 
     public static boolean isAllObjectPlaced(List<Objet1D> objets){
         for (Objet1D o : objets) {
@@ -16,6 +21,7 @@ public class Algorithme {
 
     public static List<Bac> firstFit (List<Objet1D> objetsList) {
         List<Bac> bacs = new ArrayList<>();
+        bacs.add(new Bac(1, Algorithme.widthBac));
         for (Objet1D objet : objetsList) {
             boolean placed = false;
             int nbBac = 1;
@@ -36,11 +42,12 @@ public class Algorithme {
     }
 
     public static List<Bac> bestFit(List<Objet1D> objetsList) {
+        Algorithme.reinitializeObjetID(objetsList);
         List<Bac> bacs = new ArrayList<>();
-        int idBac = 0;
+        int idBac = 1;
         Bac bac = new Bac(idBac);
 
-        while (!objetsList.isEmpty()) {
+        while (!Algorithme.isAllObjectPlaced(objetsList)) {
             Objet1D objetOptimal = null;
             int minSpaceRemaining = Integer.MAX_VALUE;
 
@@ -56,11 +63,11 @@ public class Algorithme {
                 }
             }
 
-            if (objetOptimal!= null) {
+            if (objetOptimal != null) {
                 objetOptimal.setId_bac(idBac);
                 bac.diminueSpaceLeft(objetOptimal.getWidth());
                 bac.getObjets().add(objetOptimal);
-                objetsList.remove(objetOptimal); // Retirez l'objet du liste des objets à placer
+                //objetsList.remove(objetOptimal); // Retirez l'objet du liste des objets à placer
             } else {
                 idBac++; // Incrémenter le numéro de bac si aucun objet ne peut être placé
                 bacs.add(bac);
@@ -86,6 +93,11 @@ public class Algorithme {
         return bacs;
     }
 
+    private static void reinitializeObjetID(List<Objet1D> objetsList){
+        for (Objet1D objet1D : objetsList) {
+            objet1D.setId_bac(-1);
+        }
+    }
     private static List<Bac> worstFit(List<Objet1D> objetsList) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'worstFit'");

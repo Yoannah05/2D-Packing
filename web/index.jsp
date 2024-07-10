@@ -3,5 +3,5 @@
     Author     : yoannah
 --%>
 <%  
-    response.sendRedirect("pages/index.jsp");
+    response.sendRedirect("formulaire.jsp");
 %>

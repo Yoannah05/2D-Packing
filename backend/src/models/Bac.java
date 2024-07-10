@@ -16,6 +16,13 @@ public class Bac {
         this.objets = new ArrayList<>();
     }
 
+    public Bac(int idBac, int widthBac) {
+        this.id_bac = idBac;
+        Bac.width = widthBac;
+        this.initSpaceLeft();
+        this.objets = new ArrayList<>();
+    }
+
     //  add object with first fit algorithm
     public boolean addObjetFF(Objet1D objet) {
         if (objet.getWidth() <= getSpaceLeft()) { // Check if the object fits within the current width of the bac
