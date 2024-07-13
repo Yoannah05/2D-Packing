@@ -24,7 +24,7 @@
             <option value="ff">First Fit</option>
             <option value="bf">Best Fit</option>
             <option value="wf">Worst Fit</option>
-            <option value="brf">Worst Fit</option>
+            <option value="brf">Brute Force</option>
         </select>
         <div class="invalid-feedback"></div>
     </div>

@@ -18,7 +18,7 @@ import java.util.List;
  */
 @WebServlet("/OnedServlet")
 public class OnedServlet extends HttpServlet {
-    static List<Objet1D> objet1ds = new ArrayList<>();
+    List<Objet1D> objet1ds = null;
     static int bacWidth = 0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,8 +39,11 @@ public class OnedServlet extends HttpServlet {
         //  creation des objets
         int nbrObject = Integer.parseInt(request.getParameter("nbrObjet"));
         bacWidth = Integer.parseInt(request.getParameter("width"));
-        for (int i = 1; i <= nbrObject; i++) {
-            Objet1D.add(objet1ds, i, request.getParameter("nbr" + i));
+        if (this.objet1ds == null){
+            objet1ds = new ArrayList<>();
+            for (int i = 1; i <= nbrObject; i++) {
+                Objet1D.add(objet1ds, i, request.getParameter("nbr" + i));
+            }
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("choixAlgo.jsp");
         dispatcher.forward(request, response);

@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Bac {
     private int id_bac;
-    private static int width = 500;
-    private int spaceLeft;
+    protected static int width;
+    protected int spaceLeft;
     private List<Objet1D> objets;
 
     //  constructor

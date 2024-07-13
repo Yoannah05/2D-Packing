@@ -14,11 +14,11 @@
     <div class="container">
         <div class="col-5 mb-4">
             <label for="nbrObjet" class="form-label">Combien d'objet voulez-vous inserer ?</label>
-            <input type="number" class="form-control" id="nbrObjet" required>
+            <input type="number" class="form-control" id="nbrObjet" name="nbrObjet" required>
             <div class="valid-feedback"></div>
         </div>
         
-        <form id="form" action="/OnedServlet" method="post" class="row g-3 needs-validation" novalidate></form>
+        <form id="form" action="/2D-Packing/OnedServlet" method="post" class="row g-3 needs-validation"></form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
@@ -49,7 +49,7 @@
                             formContent += `
                             <div class="col-12">
                                 <label for="nbr${i + 1}" class="form-label">Objet n°${i + 1}</label>
-                                <input type="number" class="form-control" id="nbr${i + 1}"  required>
+                                <input type="number" class="form-control" id="nbr${i + 1}" name="nbr${i + 1}" required>
                                 <div class="valid-feedback"></div>
                             </div>`;
                         }
@@ -58,7 +58,7 @@
                     formContent += `
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">Inserer</button>
-                        </div>`
+                        </div>`;
                     form.innerHTML = formContent;
             }
         </script>

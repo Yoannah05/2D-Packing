@@ -1,3 +1,11 @@
+<%@ page import="models.Rect" %>
+<%@ page import="java.util.List" %>
+<%@ page import="models.Objet2D" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    List<Rect> rects = (List<Rect>) request.getAttribute("listeRect");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,35 +17,35 @@
     <link rel="stylesheet" href="./css/resultat.css">
 </head>
 <body>
-    <h1 class="h1 text-center m-4">Resultat 1D Packing</h1>
-    <form method="get" action="/OnedServlet" class="row g-3 p-3 needs-validation w-25" novalidate>
-          <div class="">
+    <h1 class="h1 text-center m-4">Resultat 2D Packing</h1>
+    <form method="get" action="TwodServlet" class="row g-3 p-3 needs-validation" novalidate>
+        <h1 class="h1 text-center">2D Packing</h1>
+        <div class="">
             <label for="validationCustom04" class="form-label">Choix d'algorithme</label>
             <select name="algo" class="form-select" id="validationCustom04" required>
-              <option value="">First Fit</option>
-              <option value="">Best Fit</option>
-              <option value="">Worst Fit</option>
+                <option value="nfdh">NFDH</option>
+                <option value="bf">Best Fit</option>
+                <option value="ffdh">FFDH</option>
             </select>
             <div class="invalid-feedback"></div>
-          </div>
-  
-          <div class="col-12">
+        </div>
+
+        <div class="col-12">
             <button class="btn btn-primary" type="submit">Voir resultat</button>
-          </div>
+        </div>
     </form>
     <div class="container">
-        <div class="bac">
-            <div class="objet"></div>
+        <%for (Rect b : rects) { %>
+        <div class="rectangle" style="width: <%= Rect.getWidth() %>px; height: <%= Rect.getHeight() %>px;">
+            <% for (Integer integer : b.getLignes().keySet()) {
+                for (Objet2D o : b.getLignes().get(integer)) { %>
+                    <div class="objet text-center"
+                        style="background-color:<%= o.getColor() %>; width: <%= o.getWidth() %>px; height: <%= o.getHeight() %>px;">
+                        <%= o.getId_obj() %>
+                    </div>
+            <% } }%>
         </div>
-        <div class="bac">
-            <div class="objet"></div>
-        </div>
-        <div class="bac">
-            <div class="objet"></div>
-        </div>
-        <div class="bac">
-            <div class="objet"></div>
-        </div>
+        <% } %>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
