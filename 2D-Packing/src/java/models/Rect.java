@@ -14,7 +14,7 @@ public class Rect extends Bac {
     public Rect(int id_bac) {
         super(id_bac);
         this.lignes = new HashMap<>();
-        this.initSpaceLeft();
+        this.initAllSpaceLeft();
     }
 
     public boolean addObjetBF(Objet2D objet, boolean considerRotation) {
@@ -121,6 +121,9 @@ public class Rect extends Bac {
         return heightLeft;
     }
 
+    public static int getHeight() {
+        return Rect.height;
+    } 
     public List<Integer> getWidthLeft() {
         return widthLeft;
     }
@@ -149,7 +152,7 @@ public class Rect extends Bac {
         heightLeft.set(ligne, maxRemainingHeight);
     }
 
-    public void initSpaceLeft() {
+    public void initAllSpaceLeft() {
         this.spaceLeft = width;
         this.heightLeft = new ArrayList<>();
         this.widthLeft = new ArrayList<>();

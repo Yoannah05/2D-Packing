@@ -218,7 +218,7 @@ public class Algorithme {
         switch (algorithme) {
             case "ffdh":
                 return Algorithme.FFDH(objetsList, considerRotation);
-            case "bfdh":
+            case "bf":
                 return Algorithme.BFDH(objetsList, considerRotation);
             case "nfdh":
                 return Algorithme.NFDH(objetsList, considerRotation);

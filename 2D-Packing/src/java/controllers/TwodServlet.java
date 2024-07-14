@@ -27,10 +27,11 @@ public class TwodServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //  changements d'algorithme
-        Rect bacs = Algorithme.pack2D(rectangles, request.getParameter("algo"), true);
+        Rect rect = Algorithme.pack2D(rectangles, request.getParameter("algo"), true);
 
         //  redirection à la page du résultat
-        request.setAttribute("listeRect", bacs);
+        request.setAttribute("rect", rect);
+        request.setAttribute("objs", rectangles);
         RequestDispatcher dispatcher = request.getRequestDispatcher("resultat.jsp");
         dispatcher.forward(request, response);
     }

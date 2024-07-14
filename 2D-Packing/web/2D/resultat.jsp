@@ -3,7 +3,8 @@
 <%@ page import="models.Objet2D" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<Rect> rects = (List<Rect>) request.getAttribute("listeRect");
+    Rect rects = (Rect) request.getAttribute("rect");
+    List<Objet2D> ls = (List<Objet2D>) request.getAttribute("objs");
 %>
 
 <!DOCTYPE html>
@@ -34,18 +35,33 @@
             <button class="btn btn-primary" type="submit">Voir resultat</button>
         </div>
     </form>
+    <div class="info">
+        <h2>Rect details</h2>
+        <p>Width :  <%= Rect.getWidth() %></p>
+        <p>Height :  <%= Rect.getHeight() %></p>
+        <h2>Objects details</h2>
+        <ul>
+        <% for (Integer integer : rects.getLignes().keySet()) {
+            for (Objet2D o : rects.getLignes().get(integer)) { %>
+            <li>obj <%= o.getId_obj() %> - Width : <%= o.getWidth() %> - Height : <%= o.getHeight() %></li>
+        <% } } %>
+        </ul>
+        <ul>
+            <% for (Objet2D o : ls) { %>
+                <li>obj <%= o.getId_obj() %> - Width : <%= o.getWidth() %> - Height : <%= o.getHeight() %></li>
+            <% } %>
+        </ul>        
+    </div>
     <div class="container">
-        <%for (Rect b : rects) { %>
         <div class="rectangle" style="width: <%= Rect.getWidth() %>px; height: <%= Rect.getHeight() %>px;">
-            <% for (Integer integer : b.getLignes().keySet()) {
-                for (Objet2D o : b.getLignes().get(integer)) { %>
+            <% for (Integer integer : rects.getLignes().keySet()) {
+                for (Objet2D o : rects.getLignes().get(integer)) { %>
                     <div class="objet text-center"
                         style="background-color:<%= o.getColor() %>; width: <%= o.getWidth() %>px; height: <%= o.getHeight() %>px;">
                         <%= o.getId_obj() %>
                     </div>
-            <% } }%>
-        </div>
-        <% } %>
+            <% } } %>
+        </div>        
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
