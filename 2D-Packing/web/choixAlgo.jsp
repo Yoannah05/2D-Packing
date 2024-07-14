@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>1D Packing</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div class="container">
-      <form method="get" action="/OnedServlet" class="row g-3 p-3 needs-validation" novalidate>
+      <form method="get" action="OnedServlet" class="row g-3 p-3 needs-validation" novalidate>
         <h1 class="h1 text-center">1D Packing</h1>
           <div class="">
             <label for="validationCustom04" class="form-label">Choix d'algorithme</label>

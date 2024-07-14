@@ -20,19 +20,20 @@ body{
     flex-wrap: wrap;
 }
 
-.container .bac{
+.container .rectangle{
     position: relative;
-    width: 150px;
-    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    gap: 1px;
     border-bottom: 3px solid black;
     border-left: 3px solid black;
     border-right: 3px solid black;
+    flex-wrap: wrap;
 }
-.container .bac .objet{
-    position: absolute;
-    bottom: 0;
-    background-color: brown;
-    width: 90%;
+.container .rectangle .objet{
     height: 27px;
     align-self: self-end;
+    text-align: center;
 }

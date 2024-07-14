@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Form-1D Packing</title>
+    <title>Form-2D Packing</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -14,11 +14,11 @@
     <div class="container">
         <div class="col-5 mb-4">
             <label for="nbrObjet" class="form-label">Combien d'objet voulez-vous inserer ?</label>
-            <input type="number" class="form-control" id="nbrObjet" name="nbrObjet" required>
+            <input type="number" class="form-control" id="nbrObjet" required>
             <div class="valid-feedback"></div>
         </div>
         
-        <form id="form" action="/2D-Packing/OnedServlet" method="post" class="row g-3 needs-validation"></form>
+        <form id="form" action="TwodServlet" method="post" class="row g-3 needs-validation" novalidate></form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
@@ -38,27 +38,40 @@
             }
 
             function generateForm(){
-                let formContent = `<h1 class="h1 text-center">1D Packing</h1>
-                    <div class="col-12">
-                        <label for="bac" class="form-label">Width du Bac</label>
-                        <input type="number" class="form-control" id="bac"  required>
-                        <div class="valid-feedback"></div>
-                    </div>`;
-                    if (nbr.value !== "") {
-                        for (let i = 0; i < nbr.value; i++) {
-                            formContent += `
+                let formContent = `
+                            <h1 class="h1 text-center">2D Packing</h1>
                             <div class="col-12">
-                                <label for="nbr${i + 1}" class="form-label">Objet n°${i + 1}</label>
-                                <input type="number" class="form-control" id="nbr${i + 1}" name="nbr${i + 1}" required>
+                                <label for="cw" class="form-label">Width du Container</label>
+                                <input type="number" name="cw" class="form-control" id="cw"  required>
                                 <div class="valid-feedback"></div>
-                            </div>`;
+                            </div>
+                            <div class="col-12">
+                                <label for="ch" class="form-label">Height du Container</label>
+                                <input type="number" name="ch" class="form-control" id="ch"  required>
+                                <div class="valid-feedback"></div>
+                            </div><hr>`;
+
+                    if (nbr.value !== "") {
+                        for (let i = 1; i <= nbr.value; i++) {
+                            formContent += `
+                            <input type="hidden" name="nbrObjet" value="` + nbr.value + `"/>
+                            <div class="col-12">
+                                <label for="width`+i +`" class="form-label">Width du rectangle`+i +`</label>
+                                <input type="number" name="width`+i + `" class="form-control" id="cw`+i + `"  required>
+                                <div class="valid-feedback"></div>
+                            </div>
+                            <div class="col-12">
+                                <label for="Height`+i +`" class="form-label">Height du rectangle`+i +`</label>
+                                <input type="number" name="height`+i +`" class="form-control" id="ch`+i +`"  required>
+                                <div class="valid-feedback"></div>
+                            </div><hr>`;
                         }
                     }
 
                     formContent += `
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">Inserer</button>
-                        </div>`;
+                        </div>`
                     form.innerHTML = formContent;
             }
         </script>
