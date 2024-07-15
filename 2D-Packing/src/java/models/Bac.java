@@ -63,4 +63,20 @@ public class Bac {
     public void diminueSpaceLeft(int nbr){
         this.spaceLeft -= nbr;
     }
+      // Méthode pour vérifier si un objet peut s'insérer dans ce bac
+      public boolean fitsIn(Objet2D objet) {
+        return objet.getWidth() <= spaceLeft;
+    }
+
+    // Méthode pour placer un objet dans ce bac
+    public void placeIn(Objet2D objet) {
+        objets.add(objet); // Ajouter l'objet à la liste des objets dans le bac
+        objet.setId_bac(id_bac); // Définir l'ID du bac pour l'objet
+        spaceLeft -= objet.getWidth(); // Mettre à jour l'espace restant dans le bac
+    }
+
+    // Autres méthodes de gestion des objets dans le bac
+    public void removeObjet(Objet1D objet) {
+        objets.remove(objet);
+    }
 }

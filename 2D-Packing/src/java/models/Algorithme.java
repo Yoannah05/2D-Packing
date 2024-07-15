@@ -202,4 +202,46 @@ public class Algorithme {
                 throw new IllegalArgumentException("Algorithme non supporté : " + algorithme);
         }
     }
+
+
+    public static void FFDH(List<Objet2D> objets2D, List<Bac> bacsDisponibles) {
+        // Trier les objets2D par une propriété pertinente (comme le rayon pour les cercles)
+        objets2D.sort((a, b) -> {
+            if (a instanceof Cercle && b instanceof Cercle) {
+                return Double.compare(((Cercle) b).getRayon(), ((Cercle) a).getRayon());
+            } else {
+                return Integer.compare(b.getHeight(), a.getHeight());
+            }
+        });
+        
+        for (Objet2D objet : objets2D) {
+            boolean placed = false;
+            for (Bac bac : bacsDisponibles) {
+                if (objet.fitsIn(bac)) {
+                    objet.placeIn(bac);
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                // Créer un nouveau bac si aucune place n'a été trouvée
+                Bac newBac = new Bac(getNextBacId(bacsDisponibles));  // Utilisez une méthode pour obtenir le prochain ID de bac
+                objet.placeIn(newBac);
+                bacsDisponibles.add(newBac);  // Ajouter le nouveau bac à la liste des bacs disponibles
+            }
+        }
+    }
+
+    // Méthode pour obtenir le prochain ID de bac
+    private static int getNextBacId(List<Bac> bacs) {
+        int maxId = 0;
+        for (Bac bac : bacs) {
+            if (bac.getId_bac() > maxId) {
+                maxId = bac.getId_bac();
+            }
+        }
+        return maxId + 1;  // Retourne l'ID suivant après le plus grand ID actuellement utilisé
+    }
+    
+
 }

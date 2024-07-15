@@ -8,7 +8,7 @@ public class Objet2D extends Objet1D{
     private int id_ligne;
     private int height;
     private int rotation;
-    public Objet2D(int id_obj, int width, int height) {
+    public Objet2D(int id_obj, int width) {
         super(id_obj, width);
         this.setHeight(height);
     }
@@ -57,5 +57,11 @@ public class Objet2D extends Objet1D{
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }
-    
+    public boolean fitsIn(Bac bac) {
+        return false;
+    }
+
+    public void placeIn(Bac bac) {
+    }
+
 }

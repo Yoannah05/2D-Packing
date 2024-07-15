@@ -104,4 +104,30 @@ public class Rect extends Bac {
     public void setWidthLeft(List<Integer> widthLeft) {
         this.widthLeft = widthLeft;
     }
+    public boolean fitsIn(Objet2D objet) {
+        // Vérifier si l'objet peut s'insérer dans au moins une ligne du bac
+        for (Map.Entry<Integer, List<Objet2D>> entry : lignes.entrySet()) {
+            int ligne = entry.getKey();
+            if (fitInLine(objet, ligne)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Méthode pour placer un objet dans ce bac rectangulaire
+    @Override
+    public void placeIn(Objet2D objet) {
+        // Trouver et placer l'objet dans la première ligne disponible qui peut l'accueillir
+        for (Map.Entry<Integer, List<Objet2D>> entry : lignes.entrySet()) {
+            int ligne = entry.getKey();
+            if (fitInLine(objet, ligne)) {
+                lignes.get(ligne).add(objet);
+                objet.setId_ligne(ligne);
+                updateSpaceLeft(objet, ligne);
+                break;
+            }
+        }
+    }
+
 }
