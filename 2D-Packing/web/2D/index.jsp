@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>2D Packing</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
@@ -21,9 +21,17 @@
             </select>
             <div class="invalid-feedback"></div>
           </div>
+          <div class="">
+              <label for="rotation" class="form-label">Avec rotation</label>
+              <select name="rotation" class="form-select" id="rotation" required>
+                  <option value="1">Oui</option>
+                  <option value="0">Non</option>
+              </select>
+              <div class="invalid-feedback"></div>
+          </div>
   
           <div class="col-12">
-            <a href="./formulaire.jsp">Inserer données</a>
+            <a href="formulaire.jsp">Inserer données</a>
             <button class="btn btn-primary" type="submit">Voir resultat</button>
           </div>
       </form>

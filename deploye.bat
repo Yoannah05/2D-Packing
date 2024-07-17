@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 ::chemin vers la source du projet
-set "source=C:\Users\lenovo\Documents\ITU\cours\L2\M Tsinjo\2D-Packing\web\";
+set "source=C:\Users\lenovo\Documents\ITU\cours\L2\M Tsinjo\2D-Packing\2D-Packing\web";
 
 ::dossier qui va contenir temporairement les fichier à deployer
 set "COMPILE_PATH=C:\Users\lenovo\Documents\ITU\cours\L2\M Tsinjo\2D-Packing\out\production\2D-Packing";

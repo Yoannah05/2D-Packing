@@ -23,17 +23,21 @@ body{
 .container .rectangle{
     position: relative;
     display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.container .rectangle .objet{
+    align-self: self-end;
+    text-align: center;
+}
+.container .rectangle .ligne{
+    display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    gap: 1px;
-    border-bottom: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    flex-wrap: wrap;
-}
-.container .rectangle .objet{
-    height: 27px;
-    align-self: self-end;
-    text-align: center;
+    border-top: 1px solid red;
 }
