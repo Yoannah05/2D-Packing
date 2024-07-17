@@ -238,6 +238,16 @@ public class Algorithme {
         return rect;
     }
 
+    public static Rect pack2D3Forme(List<Objet2D> objetsList, String algorithme, boolean considerRotation) {
+        switch (algorithme) {
+            case "h":
+                return Algorithme.heuristique(objetsList, considerRotation);
+            case "bf":
+                return Algorithme.BFDH(objetsList, considerRotation);
+            default:
+                throw new IllegalArgumentException("Algorithme non supporté : " + algorithme);
+        }
+    }
 
     
 }

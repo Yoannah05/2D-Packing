@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: rgb(236, 236, 236);
+    width: 100%;
+    height: 100vh;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.circle {
+    position: absolute;
+    border-radius: 50%; /* Pour rendre le carré en cercle */
+}
+
+.triangle {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid blue; /* Couleur et taille du triangle */
+    position: absolute;
+}
+
+.container .rectangle{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.container .rectangle .objet,
+.cercle,
+.triangle{
+    align-self: self-end;
+    text-align: center;
+}
+.container .rectangle .ligne{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    border-top: 1px solid red;
+}
