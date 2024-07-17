@@ -226,4 +226,18 @@ public class Algorithme {
                 throw new IllegalArgumentException("Algorithme non supporté : " + algorithme);
         }
     }
+    public static Rect heuristique(List<Objet2D> objetsList, boolean considerRotation) {
+        // Sort the objects in decreasing order of height
+        Objet2D.sort(objetsList);
+        Rect rect = new Rect(1);
+        for (Objet2D objet : objetsList) {
+            if (!rect.addObjetBF(objet, considerRotation)) {
+                break;
+            }
+        }
+        return rect;
+    }
+
+
+    
 }

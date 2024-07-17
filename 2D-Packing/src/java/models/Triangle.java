@@ -15,4 +15,15 @@ public class Triangle extends Objet2D {
     public void setBase(int base) {
         this.base = base;
     }
+
+    @Override
+    public int getWidth() {
+        return (getRotation() == 1) ? getHeight() : base;
+    }
+
+    @Override
+    public int getHeight() {
+        return (getRotation() == 1) ? base : super.getHeight();
+    }
+    
 }

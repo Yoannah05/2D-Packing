@@ -16,7 +16,7 @@ public class Rect extends Bac {
         this.lignes = new HashMap<>();
         this.initAllSpaceLeft();
     }
-
+    
     public boolean addObjetBF(Objet2D objet, boolean considerRotation) {
         int bestLine = -1;
         int minSpaceLeft = width;

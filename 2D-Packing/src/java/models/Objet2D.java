@@ -19,17 +19,7 @@ public class Objet2D extends Objet1D {
         Collections.sort(objet2ds, (Objet2D o1, Objet2D o2) -> Integer.compare(o2.getWidth(), o1.getWidth()));
         Collections.sort(objet2ds, (Objet2D o1, Objet2D o2) -> Integer.compare(o2.getHeight(), o1.getHeight()));
     }
-    // Sort the objects in decreasing order of height (or radius for circles)
-    public static void sortObjects(List<Objet2D> objetsList) {
-        Collections.sort(objetsList, (Objet2D o1, Objet2D o2) -> {
-            // Comparison based on height or radius
-            if (o1 instanceof Cercle && o2 instanceof Cercle) {
-                return Double.compare(((Cercle) o2).getRayon(), ((Cercle) o1).getRayon());
-            } else {
-                return Integer.compare(o2.getHeight(), o1.getHeight());
-            }
-        });
-    }
+
 
     // Rotate the object by the specified angle
     public void rotate(int angle) {
