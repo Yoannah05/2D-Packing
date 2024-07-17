@@ -27,6 +27,8 @@ public class TwodServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //  changements d'algorithme
+        // Reset rotations for all objects
+        Objet2D.resetRotations(rectangles);
         Rect rect = null;
         boolean avecRotation = request.getParameter("rotation").equals("1");
         rect = Algorithme.pack2D(rectangles, request.getParameter("algo"), avecRotation);

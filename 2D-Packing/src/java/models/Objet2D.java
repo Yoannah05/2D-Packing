@@ -8,6 +8,11 @@ public class Objet2D extends Objet1D {
     private int height;
     private int rotation; // 0: no rotation, 1: 90°, 2: 180°
 
+    public static void resetRotations(List<Objet2D> objects) {
+        for (Objet2D obj : objects) {
+            obj.setRotation(0);
+        }
+    }
     public Objet2D(int id_obj, int width, int height) {
         super(id_obj, width);
         this.setHeight(height);
