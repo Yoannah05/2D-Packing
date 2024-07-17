@@ -26,14 +26,12 @@ body{
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    gap: 1px;
-    border-bottom: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    flex-wrap: wrap;
+    gap: 0.5px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 .container .rectangle .objet{
-    height: 27px;
     align-self: self-end;
     text-align: center;
 }
