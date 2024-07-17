@@ -24,15 +24,21 @@ body{
     position: relative;
     width: 150px;
     height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    gap: 5px;
     border-bottom: 3px solid black;
     border-left: 3px solid black;
     border-right: 3px solid black;
 }
 .container .bac .objet{
-    position: absolute;
-    bottom: 0;
-    background-color: brown;
-    width: 90%;
+    /*position: absolute;
+    bottom: 0;*/
+
+    /*width: 90%;*/
     height: 27px;
     align-self: self-end;
+    text-align: center;
 }

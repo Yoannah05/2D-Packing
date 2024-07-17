@@ -46,7 +46,6 @@ public class Algorithme {
         List<Bac> bacs = new ArrayList<>();
         int idBac = 1;
         Bac bac = new Bac(idBac);
-
         while (!Algorithme.isAllObjectPlaced(objetsList)) {
             Objet1D objetOptimal = null;
             int minSpaceRemaining = Integer.MAX_VALUE;
@@ -62,7 +61,6 @@ public class Algorithme {
                     }
                 }
             }
-
             if (objetOptimal != null) {
                 objetOptimal.setId_bac(idBac);
                 bac.diminueSpaceLeft(objetOptimal.getWidth());
