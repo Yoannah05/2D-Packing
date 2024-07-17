@@ -19,7 +19,7 @@ public class Rect extends Bac {
 
     public boolean addObjetBF(Objet2D objet, boolean considerRotation) {
         int bestLine = -1;
-        int minSpaceLeft = Integer.MAX_VALUE;
+        int minSpaceLeft = width;
         // Iterate through existing lines to find the best fit
         for (int i = 0; i < widthLeft.size(); i++) {
             if (considerRotation) {
@@ -78,12 +78,11 @@ public class Rect extends Bac {
     }
 
     private boolean createLine(Objet2D objet, int newLineIndex) {
-        int newLineHeight = objet.getHeight();
-        if (newLineHeight <= Rect.height - getTotalHeight() && objet.getWidth() <= Rect.width) {
+        if (objet.getWidth() <= Rect.width && getTotalHeight() + objet.getHeight() <= Rect.height) {
             lignes.put(newLineIndex, new ArrayList<>());
             lignes.get(newLineIndex).add(objet);
-            heightLeft.add(newLineHeight);
-            widthLeft.add(Rect.width - objet.getWidth());
+            heightLeft.add(objet.getHeight()); 
+            widthLeft.add(Rect.width - objet.getWidth()); 
             objet.setId_ligne(newLineIndex);
             return true;
         }
@@ -133,26 +132,22 @@ public class Rect extends Bac {
     }
 
     // Setters
-    // public void updateSpaceLeft(Objet2D obj, int ligne) {
-    //     widthLeft.set(ligne, widthLeft.get(ligne) - obj.getWidth());
-    //     heightLeft.set(ligne, heightLeft.get(ligne) - obj.getHeight());
-    // }
     public void updateSpaceLeft(Objet2D obj, int ligne) {
-        // Update the width left for the line
         widthLeft.set(ligne, widthLeft.get(ligne) - obj.getWidth());
-        // Calculate the remaining height left for the line
+        // Update height left based on the objects in the line
         List<Objet2D> objectsInLine = lignes.get(ligne);
-        int maxRemainingHeight = Rect.height;
+        int minHeight = Rect.height;
         for (Objet2D currentObject : objectsInLine) {
-            int remainingHeight = Rect.height - currentObject.getHeight();
-            if (remainingHeight > maxRemainingHeight) {
-                maxRemainingHeight = remainingHeight;
+            int currentHeight = currentObject.getHeight();
+            if (currentHeight < minHeight) {
+                minHeight = currentHeight;
             }
         }
-        heightLeft.set(ligne, maxRemainingHeight);
+        heightLeft.set(ligne, minHeight); // Keep track of the minimum height in the line
     }
 
-    public void initAllSpaceLeft() {
+
+    private void initAllSpaceLeft() {
         this.spaceLeft = width;
         this.heightLeft = new ArrayList<>();
         this.widthLeft = new ArrayList<>();

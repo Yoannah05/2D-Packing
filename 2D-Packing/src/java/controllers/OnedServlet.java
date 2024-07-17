@@ -37,6 +37,7 @@ public class OnedServlet extends HttpServlet {
         //  creation des objets
         int nbrObject = Integer.parseInt(request.getParameter("nbrObjet"));
         bacWidth = Integer.parseInt(request.getParameter("width"));
+        this.objet1ds = null;
         if (this.objet1ds == null){
             objet1ds = new ArrayList<>();
             for (int i = 1; i <= nbrObject; i++) {

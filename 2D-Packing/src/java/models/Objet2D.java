@@ -11,10 +11,12 @@ public class Objet2D extends Objet1D {
     public Objet2D(int id_obj, int width, int height) {
         super(id_obj, width);
         this.setHeight(height);
+        this.setRotation(0);
     }
 
     // Sort the objects in decreasing order of height
     public static void sort(List<Objet2D> objet2ds) {
+        Collections.sort(objet2ds, (Objet2D o1, Objet2D o2) -> Integer.compare(o2.getWidth(), o1.getWidth()));
         Collections.sort(objet2ds, (Objet2D o1, Objet2D o2) -> Integer.compare(o2.getHeight(), o1.getHeight()));
     }
     // Sort the objects in decreasing order of height (or radius for circles)

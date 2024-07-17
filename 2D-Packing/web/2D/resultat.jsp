@@ -41,9 +41,10 @@
         <p>Height :  <%= Rect.getHeight() %></p>
         <h2>Objects details</h2>
         <ul>
-        <% for (Integer integer : rects.getLignes().keySet()) {
+        <% for (Integer integer : rects.getLignes().keySet()) { 
+        out.print("ligne :" + integer);
             for (Objet2D o : rects.getLignes().get(integer)) { %>
-            <li>obj <%= o.getId_obj() %> - Width : <%= o.getWidth() %> - Height : <%= o.getHeight() %></li>
+            <li>obj <%= o.getId_obj() %> - Width : <%= o.getWidth() %> - Height : <%= o.getHeight() %> - Rotation : <%= o.getRotation() %></li>
         <% } } %>
         </ul>
         <ul>

@@ -45,7 +45,7 @@ public class TwodServlet extends HttpServlet {
         this.height = Integer.parseInt(request.getParameter("ch"));
         Rect.setWidth(width);
         Rect.setHeight(height);
-
+        this.rectangles = null;
         if (this.rectangles == null){
             this.rectangles = new ArrayList<>();
             for (int i = 1; i <= nbrObject; i++) {
