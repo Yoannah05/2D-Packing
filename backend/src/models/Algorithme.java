@@ -198,7 +198,6 @@ public class Algorithme {
         return rects;
     }
 
-
     private static void reinitializeObjetID(List<Objet1D> objetsList){
         for (Objet1D objet1D : objetsList) {
             objet1D.setId_bac(-1);
