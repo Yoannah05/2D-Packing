@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Algorithme {
@@ -109,38 +110,113 @@ public class Algorithme {
         return bacs;
     }
 
-    public static List<Bac> bruteForce(List<Objet1D> objetsList) {
-        int n = objetsList.size();
-        int minBins = n;
-        List<Bac> bestSolution = null;
-        List<int[]> partitions = generatePartitions(n);
-        for (int[] partition : partitions) {
-            List<Bac> bacs = createBins(partition, objetsList);
-            if (bacs.size() < minBins) {
-                minBins = bacs.size();
-                bestSolution = bacs;
-            }
+    // public static List<Bac> bruteForce(List<Objet1D> objetsList) {
+    //     int n = objetsList.size();
+    //     int minBins = n;
+    //     List<Bac> bestSolution = null;
+    //     List<int[]> partitions = generatePartitions(n);
+    //     for (int[] partition : partitions) {
+    //         List<Bac> bacs = createBins(partition, objetsList);
+    //         if (bacs.size() < minBins) {
+    //             minBins = bacs.size();
+    //             bestSolution = bacs;
+    //         }
+    //     }
+
+    //     return bestSolution;
+    // }
+
+    // private static List<int[]> generatePartitions(int n) {
+    //     List<int[]> partitions = new ArrayList<>();
+    //     int[] partition = new int[n];
+    //     generatePartitionsRecursive(partitions, partition, 0, 0);
+    //     return partitions;
+    // }
+
+    // private static void generatePartitionsRecursive(List<int[]> partitions, int[] partition, int index, int maxPart) {
+    //     if (index == partition.length) {
+    //         partitions.add(partition.clone());
+    //         return;
+    //     }
+    //     for (int i = 0; i <= maxPart; i++) {
+    //         partition[index] = i;
+    //         generatePartitionsRecursive(partitions, partition, index + 1, Math.max(maxPart, i + 1));
+    //     }
+    // }
+
+      // Fonction brute force pour le packing
+      public static List<Bac> bruteForce(List<Objet1D> objets, List<Rect> bacs) {
+        int[] meilleurPlacement = new int[objets.size()]; // Tableau pour le meilleur placement trouvé
+        int[] meilleurEspaceRestant = new int[objets.size()]; // Tableau pour le meilleur espace restant trouvé
+        int[] espaceRestantActuel = new int[bacs.size()]; // Tableau pour l'espace restant dans chaque bac actuel
+
+        // Initialisation des tableaux
+        for (int i = 0; i < bacs.size(); i++) {
+            espaceRestantActuel[i] = bacs.get(i).getSpaceLeft();
         }
 
-        return bestSolution;
+        // Appel à la fonction récursive pour explorer toutes les permutations des objets
+        bruteForceRecursive(objets, bacs, 0, espaceRestantActuel, meilleurPlacement, meilleurEspaceRestant);
+
+        // Placer les objets dans les bacs selon le meilleur placement trouvé
+        for (int i = 0; i < objets.size(); i++) {
+            objets.get(i).setId_bac(meilleurPlacement[i]);
+        }
+        return null;
     }
 
-    private static List<int[]> generatePartitions(int n) {
-        List<int[]> partitions = new ArrayList<>();
-        int[] partition = new int[n];
-        generatePartitionsRecursive(partitions, partition, 0, 0);
-        return partitions;
-    }
+    // Fonction récursive pour explorer toutes les permutations des objets
+    private static void bruteForceRecursive(List<Objet1D> objets, List<Rect> bacs, int index,
+                                                   int[] espaceRestantActuel, int[] meilleurPlacement, int[] meilleurEspaceRestant) {
+        // Base case: quand tous les objets ont été placés
+        if (index == objets.size()) {
+            // Calculer l'espace restant total dans les bacs pour cette permutation
+            int espaceTotalRestant = 0;
+            for (int espace : espaceRestantActuel) {
+                espaceTotalRestant += espace;
+            }
 
-    private static void generatePartitionsRecursive(List<int[]> partitions, int[] partition, int index, int maxPart) {
-        if (index == partition.length) {
-            partitions.add(partition.clone());
+            // Mettre à jour le meilleur placement trouvé si cette permutation utilise moins d'espace
+            if (espaceTotalRestant < calculerEspaceRestant(meilleurEspaceRestant)) {
+                for (int i = 0; i < objets.size(); i++) {
+                    meilleurPlacement[i] = objets.get(i).getId_bac();
+                }
+                copierTableau(espaceRestantActuel, meilleurEspaceRestant);
+            }
             return;
         }
-        for (int i = 0; i <= maxPart; i++) {
-            partition[index] = i;
-            generatePartitionsRecursive(partitions, partition, index + 1, Math.max(maxPart, i + 1));
+
+        // Essayer de placer l'objet index dans chaque bac disponible
+        for (int i = 0; i < bacs.size(); i++) {
+            if (objets.get(index).getWidth() <= espaceRestantActuel[i]) {
+                // Placer l'objet index dans le bac i
+                espaceRestantActuel[i] -= objets.get(index).getWidth();
+                objets.get(index).setId_bac(i);
+
+                // Appeler récursivement pour placer les objets suivants
+                bruteForceRecursive(objets, bacs, index + 1, espaceRestantActuel, meilleurPlacement, meilleurEspaceRestant);
+
+                // Retourner à l'état précédent pour essayer une autre possibilité
+                espaceRestantActuel[i] += objets.get(index).getWidth();
+                objets.get(index).setId_bac(-1);
+            }
         }
+    }
+
+    // Fonction utilitaire pour copier un tableau
+    private static void copierTableau(int[] source, int[] destination) {
+        for (int i = 0; i < source.length; i++) {
+            destination[i] = source[i];
+        }
+    }
+
+    // Fonction utilitaire pour calculer l'espace restant total dans un tableau d'espace restant
+    private static int calculerEspaceRestant(int[] espaceRestant) {
+        int total = 0;
+        for (int espace : espaceRestant) {
+            total += espace;
+        }
+        return total;
     }
 
     private static List<Bac> createBins(int[] partition, List<Objet1D> items) {
@@ -171,7 +247,7 @@ public class Algorithme {
             case "wf":
                 return Algorithme.worstFit(objetsList);
             case "brf":
-                return Algorithme.bruteForce(objetsList);
+                return Algorithme.bruteForce(objetsList, null);
             default:
                 throw new IllegalArgumentException("Algorithme non supporté : " + algorithme);
         }
@@ -226,18 +302,6 @@ public class Algorithme {
                 throw new IllegalArgumentException("Algorithme non supporté : " + algorithme);
         }
     }
-    public static Rect heuristique(List<Objet2D> objetsList, boolean considerRotation) {
-        // Sort the objects in decreasing order of height
-        Objet2D.sort(objetsList);
-        Rect rect = new Rect(1);
-        for (Objet2D objet : objetsList) {
-            if (!rect.addObjetBF(objet, considerRotation)) {
-                break;
-            }
-        }
-        return rect;
-    }
 
-
-    
 }
+    
