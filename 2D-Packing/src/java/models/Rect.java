@@ -134,23 +134,19 @@ public class Rect extends Bac {
     }
 
     // Setters
-    private void updateSpaceLeft(Objet2D obj, int lineIndex) {
-        widthLeft.set(lineIndex, widthLeft.get(lineIndex) - obj.getWidth());
-        heightLeft.set(lineIndex, Math.min(heightLeft.get(lineIndex), height - getTotalHeight()));
-    }
-    // public void updateSpaceLeft(Objet2D obj, int ligne) {
-    //     widthLeft.set(ligne, widthLeft.get(ligne) - obj.getWidth());
-    //     // Update height left based on the objects in the line
-    //     List<Objet2D> objectsInLine = lignes.get(ligne);
-    //     int minHeight = Rect.height;
-    //     for (Objet2D currentObject : objectsInLine) {
-    //         int currentHeight = currentObject.getHeight();
-    //         if (currentHeight < minHeight) {
-    //             minHeight = currentHeight;
-    //         }
-    //     }
-    //     heightLeft.set(ligne, minHeight); // Keep track of the minimum height in the line
-    // }
+     public void updateSpaceLeft(Objet2D obj, int ligne) {
+         widthLeft.set(ligne, widthLeft.get(ligne) - obj.getWidth());
+         // Update height left based on the objects in the line
+         List<Objet2D> objectsInLine = lignes.get(ligne);
+         int minHeight = Rect.height;
+         for (Objet2D currentObject : objectsInLine) {
+             int currentHeight = currentObject.getHeight();
+             if (currentHeight < minHeight) {
+                 minHeight = currentHeight;
+             }
+         }
+         heightLeft.set(ligne, minHeight); // Keep track of the minimum height in the line
+     }
 
 
     private void initAllSpaceLeft() {
