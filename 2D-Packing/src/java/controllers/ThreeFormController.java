@@ -21,6 +21,7 @@ import java.util.List;
 public class ThreeFormController extends HttpServlet {
     int width = 0;
     int height = 0;
+    int count = 1;
     List<Cercle> cercles = null;
     List<Triangle> triangles = null;
     List<Objet2D> rectangles = null;
@@ -60,21 +61,21 @@ public class ThreeFormController extends HttpServlet {
         //  creation des objets
         int nbrObject = (request.getParameter("nbrObjet") != null) ? Integer.parseInt(request.getParameter("nbrObjet")) : 0;
         if (request.getParameter("forme").equalsIgnoreCase("cercle")) {
-            for (int i = 1; i <= nbrObject; i++) {
+            for (int i = 1; i <= nbrObject; i++, this.count++) {
                 double rayon = Double.parseDouble(request.getParameter("rayon" + i));
-                this.cercles.add(new Cercle(i, rayon));
+                this.cercles.add(new Cercle(this.count, rayon));
             }
         } else if (request.getParameter("forme").equalsIgnoreCase("triangle")) {
-            for (int i = 1; i <= nbrObject; i++) {
+            for (int i = 1; i <= nbrObject; i++, this.count++) {
                 int base = Integer.parseInt(request.getParameter("base" + i));
                 int hauteur = Integer.parseInt(request.getParameter("height" + i));
-                this.triangles.add(new Triangle(i, base, hauteur));
+                this.triangles.add(new Triangle(this.count, base, hauteur));
             }
         } else if (request.getParameter("forme").equalsIgnoreCase("rectangle")) {
-            for (int i = 1; i <= nbrObject; i++) {
+            for (int i = 1; i <= nbrObject; i++, this.count++) {
                 int w = Integer.parseInt(request.getParameter("width" + i));
                 int h = Integer.parseInt(request.getParameter("height" + i));
-                rectangles.add(new Objet2D(i, w, h));
+                rectangles.add(new Objet2D(this.count, w, h));
             }
         } else if (request.getParameter("forme").equalsIgnoreCase("container")) {
             this.width = Integer.parseInt(request.getParameter("width"));

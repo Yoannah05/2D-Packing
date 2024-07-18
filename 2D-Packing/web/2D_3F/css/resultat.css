@@ -19,17 +19,6 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
 }
-.circle {
-    position: absolute;
-    border-radius: 50%; /* Pour rendre le carré en cercle */
-}
-
-.triangle {
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 40px solid blue; /* Couleur et taille du triangle */
-    position: absolute;
-}
 
 .container .rectangle{
     position: relative;
@@ -42,7 +31,7 @@ body{
     border-right: 1px solid black;
 }
 
-.container .rectangle .objet,
+.objet,
 .cercle,
 .triangle{
     align-self: self-end;
@@ -54,4 +43,7 @@ body{
     justify-content: start;
     align-items: start;
     border-top: 1px solid red;
+}
+.circle {
+    border-radius: 50%; /* Pour rendre le carré en cercle */
 }

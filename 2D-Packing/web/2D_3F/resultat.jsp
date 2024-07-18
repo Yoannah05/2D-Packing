@@ -19,7 +19,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Resultat 1D Packing</title>
-    <link rel="stylesheet" href="./css/resultat.css?v=2">
+    <link rel="stylesheet" href="./css/resultat.css?v=3">
 </head>
 <body>
     <h1 class="h1 text-center m-4">Resultat 2D Packing</h1>
@@ -48,24 +48,34 @@
         </div>
     </form>
     <div class="container">
-        <%= ls.size() %>
         <div class="rectangle" style="width: <%= Rect.getWidth() %>px; height: <%= Rect.getHeight() %>px;">
             <% for (Integer integer : rects.getLignes().keySet()) { %>
             <div class="ligne" style="width: 100%;">
                 <% for (Objet2D o : rects.getLignes().get(integer)) {
                     String forme = "";
-                    if(o instanceof Triangle){
-                        forme = "triangle";
-                    } else if(o instanceof Cercle){
-                        forme = "cercle";
-                    } else {
-                        forme = "objet";
-                    }
-                %>
-                <div class="<%= forme %> text-center"
-                     style="background-color:<%= o.getColor() %>; width: <%= o.getWidth() %>px; height: <%= o.getHeight() %>px;">
-                    <%= o.getId_obj() %>
-                </div>
+                    if(o instanceof Triangle){ %>
+                        <div class="triangle text-center align-vertical-bottom"
+                            style=" border-left: <%=o.getHeight()/ 2 %>px solid transparent;
+                                    border-right: <%=o.getHeight()/ 2 %>px solid transparent;
+                                    border-bottom: <%=o.getWidth() %>px solid <%= o.getColor() %>;
+                                    width: <%= o.getWidth() %>px;
+                                    height: <%= o.getHeight() %>px;">
+                            <%= o.getId_obj() %>
+                        </div>
+                    <% } else if(o instanceof Cercle){ %>
+                        <div class="cercle text-center align-vertical-bottom"
+                            style="background-color:<%= o.getColor() %>;
+                                    width: <%= o.getWidth() %>px;
+                                    height: <%= o.getHeight() %>px;
+                                    border-radius: 50%;">
+                            <%= o.getId_obj() %>
+                        </div>
+                    <% } else { %>
+                        <div class="objet text-center align-vertical-bottom"
+                             style="background-color:<%= o.getColor() %>; width: <%= o.getWidth() %>px; height: <%= o.getHeight() %>px;">
+                            <%= o.getId_obj() %>
+                        </div>
+                    <% } %>
                 <% } %>
             </div>
             <% } %>
