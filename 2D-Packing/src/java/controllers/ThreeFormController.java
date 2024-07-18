@@ -43,9 +43,9 @@ public class ThreeFormController extends HttpServlet {
         allFormes.addAll(triangles);
         allFormes.addAll(rectangles);
 
-        Objet2D.resetRotations(rectangles);
+        Objet2D.resetRotations(allFormes);
         boolean avecRotation = request.getParameter("rotation").equals("1");
-        Rect rect = Algorithme.pack2D3Forme(rectangles, request.getParameter("algo"), avecRotation);
+        Rect rect = Algorithme.pack2D3Forme(allFormes, request.getParameter("algo"), avecRotation);
 
         //  redirection à la page du résultat
         request.setAttribute("rect", rect);
