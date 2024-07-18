@@ -23,7 +23,7 @@ body{
 .container .rectangle{
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: end;
     align-items: start;
     border-bottom: 1px solid black;
