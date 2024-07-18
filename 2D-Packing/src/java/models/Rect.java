@@ -14,7 +14,9 @@ public class Rect extends Bac {
     public Rect(int id_bac) {
         super(id_bac);
         this.lignes = new HashMap<>();
-        this.initAllSpaceLeft();
+        this.widthLeft = new ArrayList<>();
+        this.heightLeft = new ArrayList<>();
+        initAllSpaceLeft();
     }
     
     public boolean addObjetBF(Objet2D objet, boolean considerRotation) {
@@ -132,25 +134,27 @@ public class Rect extends Bac {
     }
 
     // Setters
-    public void updateSpaceLeft(Objet2D obj, int ligne) {
-        widthLeft.set(ligne, widthLeft.get(ligne) - obj.getWidth());
-        // Update height left based on the objects in the line
-        List<Objet2D> objectsInLine = lignes.get(ligne);
-        int minHeight = Rect.height;
-        for (Objet2D currentObject : objectsInLine) {
-            int currentHeight = currentObject.getHeight();
-            if (currentHeight < minHeight) {
-                minHeight = currentHeight;
-            }
-        }
-        heightLeft.set(ligne, minHeight); // Keep track of the minimum height in the line
+    private void updateSpaceLeft(Objet2D obj, int lineIndex) {
+        widthLeft.set(lineIndex, widthLeft.get(lineIndex) - obj.getWidth());
+        heightLeft.set(lineIndex, Math.min(heightLeft.get(lineIndex), height - getTotalHeight()));
     }
+    // public void updateSpaceLeft(Objet2D obj, int ligne) {
+    //     widthLeft.set(ligne, widthLeft.get(ligne) - obj.getWidth());
+    //     // Update height left based on the objects in the line
+    //     List<Objet2D> objectsInLine = lignes.get(ligne);
+    //     int minHeight = Rect.height;
+    //     for (Objet2D currentObject : objectsInLine) {
+    //         int currentHeight = currentObject.getHeight();
+    //         if (currentHeight < minHeight) {
+    //             minHeight = currentHeight;
+    //         }
+    //     }
+    //     heightLeft.set(ligne, minHeight); // Keep track of the minimum height in the line
+    // }
 
 
     private void initAllSpaceLeft() {
         this.spaceLeft = width;
-        this.heightLeft = new ArrayList<>();
-        this.widthLeft = new ArrayList<>();
         // initial line
         heightLeft.add(height);
         widthLeft.add(width);
